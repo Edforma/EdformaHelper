@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: "Edforma Authentication API",
-    script: '/home/edforma/pm2Data/Edforma/current/index.ts',
+    script: '/home/edforma/pm2Data/EdformaHelper/current/index.ts',
     watch: '.',
     "env_production": {
       "NODE_ENV": "production",
