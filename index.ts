@@ -1,16 +1,20 @@
 import { Hono } from 'hono'
 import axios from 'axios'
 
-import { SocksProxyAgent } from 'socks-proxy-agent';
 const app = new Hono()
-const agent = new SocksProxyAgent("socks5://localhost:1055/");
 
 const axiosInstance = axios.create({
-    httpAgent: agent,
-    httpsAgent: agent
-})
+    proxy: {
+        host: '0.0.0.0',
+        port: 9090,
+        protocol: 'http',
+    },
+    headers: {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+    }
+});
 
-async function processAuthRequest(clientId: any, cookie: any) {
+async function processAuthRequest(clientId, cookie) {
     let cisdUrl = "";
     let finalCookie = {};
 
@@ -55,11 +59,12 @@ async function processAuthRequest(clientId: any, cookie: any) {
     }
 }
 
-axiosInstance.get('http://ifconfig.me/ip')
-  .then(function (response) {
+axiosInstance.request({
+    url: "http://ifconfig.me/ip",
+    method: "GET",
+}).then(response => {
     console.log(`[-] Current IP: ${response.data}`);
-  });
-
+})
 
 app.get('/auth', async (c) => {
     const clientId = c.req.query('clientId')
