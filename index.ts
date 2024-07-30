@@ -1,13 +1,19 @@
 import { Hono } from 'hono'
 import axios from 'axios'
 
+import { SocksProxyAgent } from 'socks-proxy-agent';
 const app = new Hono()
+const agent = new SocksProxyAgent("socks5://localhost:1055/");
 
+const axiosInstance = axios.create({
+    httpAgent: agent,
+    httpsAgent: agent
+})
 async function processAuthRequest(clientId: any, cookie: any) {
     let cisdUrl = "";
     let finalCookie = {};
 
-    await axios.request({
+    await axiosInstance.request({
         url: "https://launchpad.classlink.com/oauth2/v2/auth",
         method: "GET",
         params: {
@@ -28,7 +34,7 @@ async function processAuthRequest(clientId: any, cookie: any) {
         cisdUrl = response.headers["location"];
     })
 
-    await axios.request({
+    await axiosInstance.request({
         url: cisdUrl,
         method: "GET",
         headers: {
