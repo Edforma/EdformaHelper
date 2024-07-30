@@ -9,6 +9,7 @@ const axiosInstance = axios.create({
     httpAgent: agent,
     httpsAgent: agent
 })
+
 async function processAuthRequest(clientId: any, cookie: any) {
     let cisdUrl = "";
     let finalCookie = {};
@@ -53,6 +54,12 @@ async function processAuthRequest(clientId: any, cookie: any) {
         finalCookie: finalCookie,
     }
 }
+
+axiosInstance.get('http://ifconfig.me/ip')
+  .then(function (response) {
+    console.log(`[-] Current IP: ${response.data}`);
+  });
+
 
 app.get('/auth', async (c) => {
     const clientId = c.req.query('clientId')
