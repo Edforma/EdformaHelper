@@ -5,7 +5,7 @@ const app = new Hono()
 
 const axiosInstance = axios.create({
     proxy: {
-        host: '0.0.0.0',
+        host: 'localhost',
         port: 9090,
         protocol: 'http',
     },
