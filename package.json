@@ -1,0 +1,17 @@
+{
+  "name": "edformahelper",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "global": "^4.4.0",
+    "hono": "^4.5.3",
+    "pm2": "^5.4.2"
+  }
+}
