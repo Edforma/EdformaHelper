@@ -17,7 +17,8 @@ async function processAuthRequest(clientId: any, cookie: any) {
             response_type: 'code'
         },
         headers: {
-            cookie: cookie
+            cookie: cookie,
+            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
         },
         maxRedirects: 0,
         validateStatus: (status) => status < 400,
@@ -30,6 +31,9 @@ async function processAuthRequest(clientId: any, cookie: any) {
     await axios.request({
         url: cisdUrl,
         method: "GET",
+        headers: {
+            "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+        },
         maxRedirects: 0,
         validateStatus: (status) => status < 400,
     }).then((response) => {
