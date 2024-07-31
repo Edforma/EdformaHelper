@@ -7,7 +7,7 @@ async function processAuthRequest(clientId, cookie) {
     let cisdUrl = "";
     let finalCookie = {};
 
-    await axiosInstance.request({
+    await axios.request({
         url: "https://launchpad.classlink.com/oauth2/v2/auth",
         method: "GET",
         params: {
@@ -28,7 +28,7 @@ async function processAuthRequest(clientId, cookie) {
         cisdUrl = response.headers["location"];
     })
 
-    await axiosInstance.request({
+    await axios.request({
         url: cisdUrl,
         method: "GET",
         headers: {
