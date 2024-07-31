@@ -3,17 +3,6 @@ import axios from 'axios'
 
 const app = new Hono()
 
-const axiosInstance = axios.create({
-    proxy: {
-        host: 'localhost',
-        port: 1055,
-        protocol: 'http',
-    },
-    headers: {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
-    }
-});
-
 async function processAuthRequest(clientId, cookie) {
     let cisdUrl = "";
     let finalCookie = {};
@@ -59,7 +48,7 @@ async function processAuthRequest(clientId, cookie) {
     }
 }
 
-axiosInstance.request({
+axios.request({
     url: "http://ifconfig.me/ip",
     method: "GET",
 }).then(response => {
